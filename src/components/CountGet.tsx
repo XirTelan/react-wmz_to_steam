@@ -44,9 +44,10 @@ const CountGet = ({ curRates, steamRates }: CountPageProps) => {
     const totalKZT = wmzToUse * steamRates.KZT;
     const rubToKZT = (Number(totalRub) / curRates.RUB) * curRates.KZT;
     const percents = ((totalKZT - rubToKZT) / rubToKZT) * 100;
+    const wmzFinal = totalWmz - webMoneyFee - webMoneyComission;
     return {
       totalWmz,
-      wmzToUse,
+      wmzFinal,
       webMoneyFee,
       webMoneyComission,
       totalKZT,
@@ -141,7 +142,9 @@ const CountGet = ({ curRates, steamRates }: CountPageProps) => {
                   <Stat>
                     <StatLabel>WMZ you can transfer:</StatLabel>
                     <StatNumber color="green.300">
-                      {!isNaN(res.wmzToUse) ? `~${res.wmzToUse.toFixed(2)}` : "0.00"}{" "}
+                      {!isNaN(res.wmzFinal)
+                        ? `~${res.wmzFinal.toFixed(2)}`
+                        : "0.00"}{" "}
                     </StatNumber>
                   </Stat>
                 </Stack>
